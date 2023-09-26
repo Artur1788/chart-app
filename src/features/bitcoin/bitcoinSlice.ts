@@ -13,7 +13,6 @@ export const fetchBitcoinData = createAsyncThunk<
     const response = await axios(
       'https://api.coindesk.com/v1/bpi/currentprice.json'
     );
-    console.log('fetch');
 
     const data = response.data;
 

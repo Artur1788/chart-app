@@ -1,18 +1,17 @@
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
+  LineElement,
   LinearScale,
   PointElement,
-  LineElement,
   Title,
   Tooltip,
-  Legend,
 } from 'chart.js';
-import type { ChartData, ChartOptions } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
-import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { useEffect } from 'react';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { fetchBitcoinData } from '../features/bitcoin/bitcoinSlice';
 
 ChartJS.register(
@@ -28,7 +27,6 @@ ChartJS.register(
 export const Chart = () => {
   const { data: chartData, error } = useAppSelector((state) => state.bitcoin);
   const dispatch = useAppDispatch();
-  console.log(Object.values(chartData.bpi));
 
   const options = {
     responsive: true,
@@ -51,8 +49,6 @@ export const Chart = () => {
   useEffect(() => {
     let timerId: ReturnType<typeof setInterval>;
     if (!chartData.time.length) {
-      console.log('start');
-
       dispatch(fetchBitcoinData());
     } else {
       timerId = setInterval(() => {
