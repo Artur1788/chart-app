@@ -1,5 +1,4 @@
 import { SerializedError } from '@reduxjs/toolkit';
-import { CSSProperties } from 'react';
 
 export interface DataTime {
   updated: string;
@@ -7,9 +6,12 @@ export interface DataTime {
   updateduk: string;
 }
 
-export interface BPIItem extends CSSProperties {
+export interface BPIItem {
+  type: 'line';
   label: string;
   data: number[];
+  borderColor: string;
+  backgroundColor: string;
 }
 
 export interface Payload {

@@ -39,7 +39,7 @@ const initialState: BitcoinState = {
 };
 
 export const counterSlice = createSlice({
-  name: 'counter',
+  name: 'bitcoin',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -50,6 +50,7 @@ export const counterSlice = createSlice({
       state.isLoading = false;
 
       for (const [key, value] of Object.entries(action.payload.bpi)) {
+        const color = colorGenerator();
         if (state.data.bpi[key]) {
           if (state.data.bpi[key].data.length > 5) {
             state.data.bpi[key].data.shift();
@@ -57,10 +58,11 @@ export const counterSlice = createSlice({
           state.data.bpi[key].data.push(value.rate_float);
         } else {
           state.data.bpi[key] = {
+            type: 'line',
             label: key,
             data: [value.rate_float],
-            borderColor: colorGenerator(),
-            backgroundColor: colorGenerator(),
+            borderColor: color,
+            backgroundColor: color,
           };
         }
       }
